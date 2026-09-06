@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#05070a" />
+<meta name="description" content="KERYON Rescue Grid — synthetic urban flash-flood response and access-routing prototype." />
+<title>KERYON Rescue Grid // Urban Flash-Flood Response</title>
+<style>
+:root{--bg:#05070a;--panel:#0b1016;--card:#101821;--line:#26313d;--text:#eef3f7;--muted:#8c9aa8;--gold:#d6a94a;--cyan:#5fc8e8;--green:#65d69a;--amber:#efbd63;--red:#ef6f6f;--blue:#3a86ff}
+*{box-sizing:border-box}html{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -20%,#13202c 0,#05070a 46%)}button,input,select{font:inherit}.app{max-width:1750px;margin:auto;padding:14px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:12px}.brand{display:flex;gap:12px;align-items:center}.mark{width:48px;height:48px;border:1px solid #39434e;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#171d24,#07090c)}.mark svg{width:34px}.brand h1{margin:0;font-size:15px;letter-spacing:.22em}.brand p{margin:4px 0 0;font:10px ui-monospace,monospace;color:var(--muted);letter-spacing:.11em}.status{display:flex;align-items:center;gap:8px;color:var(--muted);font:11px ui-monospace,monospace}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px rgba(101,214,154,.5)}
+.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(340px,.72fr);gap:12px}.panel{border:1px solid var(--line);background:rgba(10,15,21,.93);border-radius:16px;overflow:hidden}.mapwrap{position:relative;aspect-ratio:16/10;background:#081017}.map{display:block;width:100%;height:100%}.hud{position:absolute;left:12px;right:12px;top:12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.badge{padding:7px 9px;border:1px solid rgba(255,255,255,.14);background:rgba(5,8,11,.72);border-radius:8px;backdrop-filter:blur(7px);font:10px ui-monospace,monospace}.legend{position:absolute;left:12px;bottom:12px;display:flex;gap:7px;flex-wrap:wrap}.legend span{padding:5px 7px;border-radius:999px;background:rgba(5,8,11,.72);border:1px solid rgba(255,255,255,.11);font:9px ui-monospace,monospace}.telemetry{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}.metric{background:var(--panel);padding:11px}.metric .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}.metric .v{margin-top:5px;font:700 17px/1 ui-monospace,monospace}.metric .u{font-size:9px;color:var(--muted);margin-left:3px}.side{display:flex;flex-direction:column;gap:12px}.section{padding:14px}.section h2{font-size:11px;text-transform:uppercase;letter-spacing:.16em;margin:0 0 12px}.field{margin-bottom:11px}.field label{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-bottom:6px}.field input[type=range]{width:100%;accent-color:var(--gold)}.btnrow{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:7px}.btn{min-height:42px;border:1px solid var(--line);border-radius:9px;background:#111820;color:var(--text);cursor:pointer}.btn.primary{background:var(--gold);color:#111;border-color:var(--gold);font-weight:800}.btn:hover{filter:brightness(1.1)}.kpis{display:grid;grid-template-columns:1fr 1fr;gap:7px}.card{border:1px solid var(--line);border-radius:10px;background:#0a0f15;padding:10px}.card .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}.card .v{margin-top:5px;font:700 15px ui-monospace,monospace}.queue{display:grid;gap:7px}.incident{border:1px solid var(--line);border-radius:10px;background:#0a0f15;padding:9px}.incident .head{display:flex;justify-content:space-between;gap:10px;font-size:10px}.incident .score{font:700 11px ui-monospace,monospace}.incident p{margin:5px 0 0;color:#c1ccd5;font-size:10px;line-height:1.35}.critical{border-color:rgba(239,111,111,.55)}.high{border-color:rgba(239,189,99,.5)}.ok{border-color:rgba(101,214,154,.45)}.log{max-height:170px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:#070b0f;padding:9px;font:10px/1.5 ui-monospace,monospace;color:#afbbc5}.log div{padding:3px 0;border-bottom:1px dashed #19232d}.log div:last-child{border:0}.note{margin-top:12px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;color:var(--muted);font-size:10px;line-height:1.5}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#667583;font-size:9px;letter-spacing:.08em;margin-top:10px}.tiny{font-size:9px;color:var(--muted)}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.telemetry{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.app{padding:8px}.brand p,.status span:last-child{display:none}.side{grid-template-columns:1fr}.telemetry{grid-template-columns:repeat(2,1fr)}.btnrow{grid-template-columns:1fr}.mapwrap{aspect-ratio:4/5}.hud{flex-direction:column;align-items:flex-start}.kpis{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="top">
+  <div class="brand">
+    <div class="mark" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none"><path d="M8 28L48 38L38 48L16 44L8 28Z" fill="#cbd0d4"/><path d="M18 49L43 52L36 61L24 59L18 49Z" fill="#9fa6ac"/><path d="M33 78L57 28L68 37L53 58L69 74H54L46 66L40 78H33Z" fill="#d8dde0"/><path d="M62 31L92 50L62 69L70 54L84 50L70 46L62 31Z" fill="#d6a94a"/></svg></div>
+    <div><h1>KERYON RESCUE GRID</h1><p>URBAN FLASH-FLOOD RESPONSE // OPERATIONAL CONCEPT PROTOTYPE</p></div>
+  </div>
+  <div class="status"><i class="dot"></i><span id="status">READY</span><span>// SYNTHETIC INCIDENT DATA</span></div>
+</header>
+
+<div class="layout">
+<section class="panel">
+  <div class="mapwrap">
+    <canvas id="map" class="map" aria-label="Synthetic Manhattan flood response map"></canvas>
+    <div class="hud"><div class="badge" id="hudLeft">MANHATTAN // FLASH-FLOOD RESPONSE</div><div class="badge" id="hudRight">NOEMA // DECISION SUPPORT ACTIVE</div></div>
+    <div class="legend"><span style="color:var(--cyan)">● SCANNED</span><span style="color:var(--amber)">● FLOODED</span><span style="color:var(--red)">● BLOCKED</span><span style="color:var(--green)">● SAFE ROUTE</span></div>
+  </div>
+  <div class="telemetry">
+    <div class="metric"><div class="k">Rainfall</div><div class="v"><span id="rainMetric">55</span><span class="u">mm/h</span></div></div>
+    <div class="metric"><div class="k">Coverage</div><div class="v"><span id="coverageMetric">0</span><span class="u">%</span></div></div>
+    <div class="metric"><div class="k">Blocked roads</div><div class="v"><span id="blockedMetric">0</span></div></div>
+    <div class="metric"><div class="k">Critical zones</div><div class="v"><span id="criticalMetric">0</span></div></div>
+    <div class="metric"><div class="k">Route saved</div><div class="v"><span id="routeMetric">0</span><span class="u">min</span></div></div>
+    <div class="metric"><div class="k">Sim time</div><div class="v"><span id="timeMetric">00:00</span></div></div>
+  </div>
+</section>
+
+<aside class="side">
+<section class="panel section">
+  <h2>Incident Controls</h2>
+  <div class="field"><label><b>Rain intensity</b><output id="rainOut">55 mm/h</output></label><input id="rain" type="range" min="15" max="100" value="55" /></div>
+  <div class="field"><label><b>UAV fleet</b><output id="fleetOut">4 UAV</output></label><input id="fleet" type="range" min="1" max="8" value="4" /></div>
+  <div class="field"><label><b>Simulation speed</b><output id="speedOut">4×</output></label><input id="speed" type="range" min="1" max="10" value="4" /></div>
+  <div class="btnrow"><button id="start" class="btn primary">START RESPONSE</button><button id="pause" class="btn">PAUSE</button><button id="reset" class="btn">RESET</button></div>
+  <div class="tiny" style="margin-top:9px">Goal: map flood depth, detect impassable road segments, rank priority zones and compute a safer responder route.</div>
+</section>
+
+<section class="panel section">
+  <h2>Operational Outputs</h2>
+  <div class="kpis">
+    <div class="card"><div class="k">Area scanned</div><div class="v" id="scanKpi">0%</div></div>
+    <div class="card"><div class="k">Route confidence</div><div class="v" id="confidenceKpi">42%</div></div>
+    <div class="card"><div class="k">Isolated blocks</div><div class="v" id="isolatedKpi">0</div></div>
+    <div class="card"><div class="k">Decision latency</div><div class="v" id="latencyKpi">—</div></div>
+  </div>
+</section>
+
+<section class="panel section">
+  <h2>NOEMA Priority Queue</h2>
+  <div class="queue" id="queue"><div class="incident ok"><div class="head"><b>WAITING FOR SCAN</b><span class="score">—</span></div><p>Start the response mission to generate prioritized incident zones.</p></div></div>
+</section>
+
+<section class="panel section">
+  <h2>Decision Stream</h2>
+  <div class="log" id="log"><div>SYS // Rescue Grid initialized</div><div>DATA // Using synthetic flood and road-access data</div></div>
+</section>
+</aside>
+</div>
+
+<div class="note"><b>Prototype scope:</b> this page demonstrates a decision-support workflow for urban flash-flood response. Flood depths, roads, facilities and incident locations are synthetic. It is not emergency guidance and does not replace official GIS, dispatch or aviation systems. The intended product direction is to ingest authorized municipal, weather, sensor and UAV data and convert it into a continuously updated access-and-priority map.</div>
+<div class="footer"><span>KERYON DYNAMICS // RESCUE GRID</span><span>FROM UAV VIDEO TO ACTIONABLE ACCESS MAPS</span></div>
+</main>
+<script>
+(() => {
+const $=id=>document.getElementById(id), canvas=$('map'), ctx=canvas.getContext('2d');
+const ui={status:$('status'),rain:$('rain'),rainOut:$('rainOut'),fleet:$('fleet'),fleetOut:$('fleetOut'),speed:$('speed'),speedOut:$('speedOut'),start:$('start'),pause:$('pause'),reset:$('reset'),rainMetric:$('rainMetric'),coverageMetric:$('coverageMetric'),blockedMetric:$('blockedMetric'),criticalMetric:$('criticalMetric'),routeMetric:$('routeMetric'),timeMetric:$('timeMetric'),scanKpi:$('scanKpi'),confidenceKpi:$('confidenceKpi'),isolatedKpi:$('isolatedKpi'),latencyKpi:$('latencyKpi'),queue:$('queue'),log:$('log')};
+const state={running:false,t:0,coverage:0,confidence:42,blocked:0,critical:0,isolated:0,routeSaved:0,decisionLatency:null,lastUpdate:0};
+let W=900,H=620,roads=[],blocks=[],drones=[],facilities=[],route=[];
+function log(msg){const d=document.createElement('div');d.textContent=msg;ui.log.prepend(d);while(ui.log.children.length>12)ui.log.lastElementChild.remove()}
+function fmt(sec){const m=Math.floor(sec/60),s=Math.floor(sec%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function resize(){const r=canvas.parentElement.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1);W=Math.max(320,r.width);H=Math.max(380,r.height);canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);buildCity();draw()}
+new ResizeObserver(resize).observe(canvas.parentElement);
+function buildCity(){
+ roads=[];blocks=[];facilities=[];route=[];
+ const cols=9,rows=14,margin=42,gx=(W-margin*2)/(cols-1),gy=(H-margin*2)/(rows-1);
+ for(let c=0;c<cols;c++) roads.push({type:'v',x:margin+c*gx,y1:margin,y2:H-margin,depth:0,blocked:false,scanned:0});
+ for(let r=0;r<rows;r++) roads.push({type:'h',y:margin+r*gy,x1:margin,x2:W-margin,depth:0,blocked:false,scanned:0});
+ for(let c=0;c<cols-1;c++) for(let r=0;r<rows-1;r++) blocks.push({c,r,x:margin+c*gx+5,y:margin+r*gy+5,w:gx-10,h:gy-10,risk:0,scanned:0});
+ facilities=[
+  {name:'HOSPITAL',c:6,r:5,kind:'hospital'},
+  {name:'SHELTER',c:2,r:9,kind:'shelter'},
+  {name:'SUBSTATION',c:5,r:10,kind:'utility'},
+  {name:'EMS',c:1,r:2,kind:'ems'}
+ ];
+ const n=Number(ui.fleet.value);drones=Array.from({length:n},(_,i)=>({p:i/n,sector:i/n,trail:[]}));
+ updateFlood();
+}
+function pseudo(c,r){return (Math.sin(c*12.9898+r*78.233)*43758.5453)%1}
+function updateFlood(){
+ const rain=Number(ui.rain.value), intensity=(rain-15)/85;
+ roads.forEach((rd,i)=>{const seed=Math.abs(Math.sin(i*8.171+3.7));const low=(i%5===0?0.28:0)+(i%7===0?0.18:0);rd.depth=Math.max(0,(seed*.55+low+intensity*.75-.46))*0.85;rd.blocked=rd.depth>0.42;});
+ blocks.forEach((b,i)=>{const low=((b.r>8&&b.c<4)?0.26:0)+((b.r<4&&b.c>5)?0.14:0);b.risk=Math.min(1,Math.max(0,Math.abs(Math.sin(i*1.71))*0.34+low+intensity*.62-.22));});
+}
+function roadXY(rd,k=.5){return rd.type==='v'?{x:rd.x,y:rd.y1+(rd.y2-rd.y1)*k}:{x:rd.x1+(rd.x2-rd.x1)*k,y:rd.y}}
+function draw(){
+ ctx.clearRect(0,0,W,H);ctx.fillStyle='#081017';ctx.fillRect(0,0,W,H);
+ // water / river bands
+ ctx.fillStyle='#071722';ctx.fillRect(0,0,26,H);ctx.fillRect(W-26,0,26,H);
+ // blocks
+ blocks.forEach(b=>{const a=.08+b.risk*.24;ctx.fillStyle=`rgba(${b.risk>.65?239:38},${b.risk>.65?111:52},${b.risk>.65?111:64},${a})`;ctx.fillRect(b.x,b.y,b.w,b.h);if(b.scanned>.15){ctx.strokeStyle='rgba(95,200,232,.22)';ctx.strokeRect(b.x,b.y,b.w,b.h)}});
+ // roads
+ roads.forEach(rd=>{const p=roadXY(rd);let col='#26313d';if(rd.blocked)col='#ef6f6f';else if(rd.depth>.18)col='#efbd63';else if(rd.scanned>.55)col='#65d69a';ctx.strokeStyle=col;ctx.lineWidth=rd.blocked?4:2;ctx.beginPath();if(rd.type==='v'){ctx.moveTo(rd.x,rd.y1);ctx.lineTo(rd.x,rd.y2)}else{ctx.moveTo(rd.x1,rd.y);ctx.lineTo(rd.x2,rd.y)}ctx.stroke();if(rd.depth>.12){ctx.fillStyle='rgba(58,134,255,.28)';ctx.beginPath();ctx.arc(p.x,p.y,5+rd.depth*10,0,Math.PI*2);ctx.fill()}});
+ // safe route
+ if(route.length>1){ctx.strokeStyle='#65d69a';ctx.lineWidth=5;ctx.setLineDash([10,7]);ctx.beginPath();route.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();ctx.setLineDash([])}
+ // facilities
+ facilities.forEach(f=>{const p=node(f.c,f.r);const colors={hospital:'#ef6f6f',shelter:'#65d69a',utility:'#efbd63',ems:'#5fc8e8'};ctx.fillStyle=colors[f.kind];ctx.fillRect(p.x-6,p.y-6,12,12);ctx.fillStyle='#eef3f7';ctx.font='9px ui-monospace,monospace';ctx.fillText(f.name,p.x+9,p.y+3)});
+ // drones and scan circles
+ drones.forEach((d,i)=>{const p=dronePos(d);ctx.strokeStyle='rgba(95,200,232,.15)';ctx.beginPath();ctx.arc(p.x,p.y,50,0,Math.PI*2);ctx.stroke();ctx.fillStyle=i===0?'#d6a94a':'#5fc8e8';ctx.beginPath();ctx.moveTo(p.x+9,p.y);ctx.lineTo(p.x-7,p.y-5);ctx.lineTo(p.x-3,p.y);ctx.lineTo(p.x-7,p.y+5);ctx.closePath();ctx.fill();ctx.fillStyle='#cbd5dd';ctx.font='9px ui-monospace,monospace';ctx.fillText('UAV-'+(i+1),p.x+11,p.y-7)});
+ requestAnimationFrame(draw);
+}
+function node(c,r){const margin=42,gx=(W-margin*2)/8,gy=(H-margin*2)/13;return{x:margin+c*gx,y:margin+r*gy}}
+function dronePos(d){const angle=d.p*Math.PI*2;return{x:W/2+Math.cos(angle)*W*.34,y:H/2+Math.sin(angle*1.18)*H*.34}}
+function scanStep(dt){
+ const sp=Number(ui.speed.value), fleet=Number(ui.fleet.value);state.t+=dt*sp;state.coverage=Math.min(100,state.coverage+dt*sp*(1.4+fleet*.72));state.confidence=Math.min(98,42+state.coverage*.55);
+ drones.forEach((d,i)=>{d.p=(d.p+dt*sp*(.012+i*.0017))%1;const p=dronePos(d);blocks.forEach(b=>{const cx=b.x+b.w/2,cy=b.y+b.h/2,dist=Math.hypot(cx-p.x,cy-p.y);if(dist<72)b.scanned=Math.min(1,b.scanned+dt*sp*.9)});roads.forEach(rd=>{const rp=roadXY(rd);if(Math.hypot(rp.x-p.x,rp.y-p.y)<90)rd.scanned=Math.min(1,rd.scanned+dt*sp*.8)})});
+ if(state.t-state.lastUpdate>4){state.lastUpdate=state.t;recomputeDecision()}
+ updateHud();
+}
+function recomputeDecision(){
+ updateFlood();const scannedRoads=roads.filter(r=>r.scanned>.35);state.blocked=scannedRoads.filter(r=>r.blocked).length;const scored=blocks.filter(b=>b.scanned>.3).map((b,i)=>({b,score:Math.round(b.risk*100 + ((b.r<4||b.r>9)?8:0))})).sort((a,b)=>b.score-a.score);state.critical=scored.filter(x=>x.score>=72).length;state.isolated=Math.max(0,Math.round(state.blocked/4-1));state.decisionLatency=(2.2+Math.max(0,8-Number(ui.fleet.value))*.35).toFixed(1);state.routeSaved=Math.max(0,Math.round(state.blocked*.8+state.coverage*.03));computeRoute();renderQueue(scored.slice(0,4));log(`NOEMA // ${state.blocked} blocked road segments confirmed; ${state.critical} priority zones ranked`)}
+function computeRoute(){
+ const start=node(1,2),goal=node(6,5),mid1=node(2,3),mid2=node(4,4),alt1=node(2,5),alt2=node(4,6);const directBlocked=state.blocked>3;route=directBlocked?[start,alt1,alt2,goal]:[start,mid1,mid2,goal];
+}
+function renderQueue(scored){if(!scored.length){ui.queue.innerHTML='<div class="incident ok"><div class="head"><b>SCANNING</b><span class="score">LOW CONFIDENCE</span></div><p>More observations are required before prioritization.</p></div>';return}ui.queue.innerHTML=scored.map((x,i)=>{const b=x.b,cls=x.score>=75?'critical':x.score>=55?'high':'ok',name=x.score>=75?'PRIORITY '+(i+1)+' // ACCESS RISK':x.score>=55?'WATCH '+(i+1)+' // FLOODING':'CLEAR '+(i+1);const action=x.score>=75?'Dispatch UAV confirmation and reroute ground responders around blocked segments.':x.score>=55?'Continue monitoring; maintain alternate access route.':'No immediate intervention required.';return `<div class="incident ${cls}"><div class="head"><b>${name}</b><span class="score">${x.score}/100</span></div><p>Sector ${String.fromCharCode(65+b.c)}-${b.r+1}. ${action}</p></div>`}).join('')}
+function updateHud(){ui.rainMetric.textContent=ui.rain.value;ui.coverageMetric.textContent=Math.round(state.coverage);ui.blockedMetric.textContent=state.blocked;ui.criticalMetric.textContent=state.critical;ui.routeMetric.textContent=state.routeSaved;ui.timeMetric.textContent=fmt(state.t);ui.scanKpi.textContent=Math.round(state.coverage)+'%';ui.confidenceKpi.textContent=Math.round(state.confidence)+'%';ui.isolatedKpi.textContent=state.isolated;ui.latencyKpi.textContent=state.decisionLatency?state.decisionLatency+' s':'—'}
+function reset(){state.running=false;state.t=0;state.coverage=0;state.confidence=42;state.blocked=0;state.critical=0;state.isolated=0;state.routeSaved=0;state.decisionLatency=null;state.lastUpdate=0;ui.status.textContent='READY';ui.pause.textContent='PAUSE';buildCity();ui.queue.innerHTML='<div class="incident ok"><div class="head"><b>WAITING FOR SCAN</b><span class="score">—</span></div><p>Start the response mission to generate prioritized incident zones.</p></div>';updateHud();log('SYS // Mission reset')}
+ui.rain.oninput=()=>{ui.rainOut.textContent=ui.rain.value+' mm/h';updateFlood()};ui.fleet.oninput=()=>{ui.fleetOut.textContent=ui.fleet.value+' UAV';buildCity()};ui.speed.oninput=()=>ui.speedOut.textContent=ui.speed.value+'×';ui.start.onclick=()=>{state.running=true;ui.status.textContent='RESPONSE ACTIVE';log('OPS // UAV flood-response mission started');log('NOEMA // Building first-pass access map')};ui.pause.onclick=()=>{state.running=!state.running;ui.pause.textContent=state.running?'PAUSE':'RESUME';ui.status.textContent=state.running?'RESPONSE ACTIVE':'PAUSED'};ui.reset.onclick=reset;
+let last=performance.now();function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(state.running)scanStep(dt);requestAnimationFrame(loop)}
+resize();reset();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
