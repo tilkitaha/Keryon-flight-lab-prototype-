@@ -2,11 +2,39 @@
 
 **3D UAV Flight, Autonomy, Digital-Twin & Disaster-Resilience Simulation Prototype**
 
-KERYON Flight Lab is a browser-based research simulator for testing unmanned aircraft behavior in non-weaponized flight, autonomy, navigation, environmental resilience and disaster-response scenarios.
+KERYON Flight Lab is a research platform for non-weaponized autonomy, runtime assurance, disaster response and reusable air/space vehicle intelligence.
+
+## KERYON ORACLE SPACE BRAIN — deterministic flight kernel
+
+The newest engineering layer is **KERYON ORACLE Space Brain** in `space-brain/`.
+
+Unlike the browser-only demos, this module is a software-in-the-loop spacecraft autonomy reference kernel built around explicit physics, actuator limits, power constraints and fault-management rules. ORACLE remains above the vehicle-survival layer: AI may recommend a plan, but it cannot override hard flight invariants.
+
+Current Space Brain logic includes:
+
+- Earth-centered inertial orbital state
+- Two-body gravity + J2 perturbation and RK4 propagation
+- WGS-84 ground-station geometry and light-time calculation
+- Solar-vector approximation and Earth-eclipse detection
+- Quaternion rigid-body attitude dynamics
+- Nadir and Sun-safe attitude targets
+- Bounded reaction-wheel control
+- Centered Earth magnetic-field model and magnetorquer B-dot detumble
+- Solar-array/battery power accounting
+- Automatic communication-window detection
+- Deterministic `BOOT → DETUMBLE → SUN_ACQUIRE → NOMINAL / DOWNLINK` mode logic
+- FDIR transition to power-preserving `SAFE`
+- Sustained-condition Safe-mode recovery
+- Star-tracker, gyro, comms, power-load and wheel-degradation fault injection
+- Automated physics/FDIR unit tests
+
+The current Python kernel is **not flight-certified**. The flight path is to cross-validate against GMAT/SPICE, add higher-fidelity force/sensor models, then port the bounded components into a flight framework such as F´ or cFS and verify them through SIL/PIL/HIL testing.
+
+See `space-brain/README.md` and `space-brain/ARCHITECTURE.md`.
 
 ## KERYON ORACLE v2 — Runtime Assurance Lab
 
-The flagship R&D direction is **KERYON ORACLE v2**, a counterfactual planning and runtime-assurance layer for autonomous fleets.
+The flagship autonomy-assurance direction is **KERYON ORACLE v2**, a counterfactual planning and runtime-assurance layer for autonomous fleets.
 
 Open `oracle-v2.html` to run the latest prototype. The earlier `oracle.html` remains available as the first Shadow Twin concept.
 
@@ -139,13 +167,21 @@ Open:
 - `http://localhost:8080/oracle.html` — ORACLE v1 Shadow Twin
 - `http://localhost:8080/oracle-v2.html` — ORACLE v2 Runtime Assurance Lab
 
+For the deterministic spacecraft kernel:
+
+```bash
+cd space-brain
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python run_simulation.py --duration 1800 --dt 1
+```
+
 ## Stack
 
-- HTML / CSS / JavaScript
-- Three.js
-- Public Manhattan GeoJSON
-- NYC Open Data Building Footprints (when reachable)
-- Procedural geometry fallback
+- HTML / CSS / JavaScript / Three.js for visual prototypes
+- Python + NumPy for the current deterministic Space Brain reference kernel
+- Public Manhattan GeoJSON and NYC Open Data where available
+- Planned F´/cFS flight-software port and GMAT/SPICE validation
 
 ## Brand
 
