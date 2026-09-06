@@ -4,9 +4,37 @@
 
 KERYON Flight Lab is a browser-based research simulator for testing unmanned aircraft behavior in non-weaponized flight, autonomy, navigation, environmental resilience and disaster-response scenarios.
 
+## KERYON ORACLE — Shadow Twin Autonomy Engine
+
+The newest flagship R&D concept is **KERYON ORACLE**, a counterfactual autonomy-assurance layer.
+
+Open `oracle.html` to run the prototype.
+
+Instead of choosing a route only from a nominal prediction, ORACLE generates many uncertain futures for several candidate mission plans and compares them before execution. The prototype currently evaluates 1,536 synthetic counterfactual outcomes per decision (512 for each of three candidate plans).
+
+It varies factors such as:
+
+- Weather uncertainty
+- GNSS outage probability
+- Battery health
+- Fleet size and redundancy
+
+For each candidate plan, ORACLE estimates:
+
+- Robust mission-success probability
+- 5th-percentile energy reserve
+- 5th-percentile link resilience
+- Downside-loss score
+
+It then selects the plan with the strongest combined robustness margin and explains why a faster or more energy-efficient alternative was rejected.
+
+The prototype also includes **live Shadow Mode**. A simulated real mission is compared against the accepted digital-twin envelope. If reality divergence crosses the assurance threshold, ORACLE recommends re-planning rather than silently continuing with a stale plan.
+
+This is a synthetic operational-concept prototype, not flight guidance. The long-term product direction is trusted autonomy: **simulate → compare → explain → shadow → adapt**.
+
 ## KERYON Rescue Grid — real problem focus
 
-The project now includes **KERYON Rescue Grid**, an operational-concept prototype focused on urban flash-flood response.
+The project includes **KERYON Rescue Grid**, an operational-concept prototype focused on urban flash-flood response.
 
 Open `rescue-grid.html` to test the workflow.
 
@@ -95,7 +123,11 @@ The simulator is intentionally focused on flight dynamics, navigation, autonomy,
 python -m http.server 8080
 ```
 
-Open `http://localhost:8080` for Flight Lab or `http://localhost:8080/rescue-grid.html` for Rescue Grid.
+Open:
+
+- `http://localhost:8080` — Flight Lab
+- `http://localhost:8080/rescue-grid.html` — Rescue Grid
+- `http://localhost:8080/oracle.html` — ORACLE Shadow Twin
 
 ## Stack
 
