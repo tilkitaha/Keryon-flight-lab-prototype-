@@ -4,6 +4,33 @@
 
 KERYON Flight Lab is a browser-based research simulator for testing unmanned aircraft behavior in non-weaponized flight, autonomy, navigation, environmental resilience and disaster-response scenarios.
 
+## KERYON Rescue Grid — real problem focus
+
+The project now includes **KERYON Rescue Grid**, an operational-concept prototype focused on urban flash-flood response.
+
+Open `rescue-grid.html` to test the workflow.
+
+The problem it addresses is not simply drone flight. During fast-moving urban flooding, responders need a continuously updated answer to four questions:
+
+1. Which road segments are becoming impassable?
+2. Which blocks or critical facilities are at highest access risk?
+3. Where should the UAV fleet scan next to reduce uncertainty?
+4. What ground route remains usable for responders?
+
+The current prototype uses synthetic incident data and demonstrates:
+
+- Multi-UAV sector scanning
+- Synthetic flood-depth estimation
+- Passable / flooded / blocked road classification
+- Continuously increasing observation confidence
+- Priority scoring for incident zones
+- Isolated-block estimation
+- Automatic responder-route rerouting around blocked segments
+- Explainable NOEMA decision stream
+- Decision-latency and coverage KPIs
+
+The intended future system would ingest authorized municipal GIS, weather, drainage, traffic and UAV sensor data. The current page is an operational concept, **not emergency guidance**.
+
 ## New York test environment
 
 The current prototype opens in a **Manhattan digital test range**.
@@ -68,7 +95,7 @@ The simulator is intentionally focused on flight dynamics, navigation, autonomy,
 python -m http.server 8080
 ```
 
-Open `http://localhost:8080`.
+Open `http://localhost:8080` for Flight Lab or `http://localhost:8080/rescue-grid.html` for Rescue Grid.
 
 ## Stack
 
