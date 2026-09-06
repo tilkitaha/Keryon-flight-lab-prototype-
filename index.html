@@ -7,12 +7,13 @@
 <meta name="description" content="KERYON Flight Lab — Manhattan digital-twin UAV autonomy and resilience simulator." />
 <title>KERYON Flight Lab // Manhattan Digital Twin</title>
 <link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="./disaster.css" />
 </head>
 <body>
 <main class="app">
 <header class="topbar">
   <div class="brand"><div class="mark" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none"><path d="M8 28L48 38L38 48L16 44L8 28Z" fill="#cbd0d4"/><path d="M18 49L43 52L36 61L24 59L18 49Z" fill="#9fa6ac"/><path d="M33 78L57 28L68 37L53 58L69 74H54L46 66L40 78H33Z" fill="#d8dde0"/><path d="M62 31L92 50L62 69L70 54L84 50L70 46L62 31Z" fill="#d6a94a"/></svg></div><div><h1>KERYON DYNAMICS</h1><p>FLIGHT LAB // MANHATTAN DIGITAL TWIN // INTELLIGENCE IN MOTION</p></div></div>
-  <div class="statusline"><i class="dot"></i><span id="simState">DIGITAL TWIN SYNC</span><span>// PROTOTYPE 0.4</span></div>
+  <div class="statusline"><i class="dot"></i><span id="simState">DIGITAL TWIN SYNC</span><span>// PROTOTYPE 0.5</span></div>
 </header>
 
 <div class="layout">
@@ -85,9 +86,10 @@
 </aside>
 </div>
 
-<div class="safety"><b>Research scope:</b> non-weaponized digital-twin prototype for flight dynamics, autonomy, mapping, navigation, reliability and environmental resilience. Aircraft classes are generic public reference categories. The synthetic corridors shown are not real-world aviation guidance. Weapon employment, targeting, strike planning and offensive mission logic are not modeled.</div>
-<div class="footerbar"><span>KERYON FLIGHT LAB // MANHATTAN DIGITAL TWIN</span><span>Official NYC building footprint data used when available // graceful procedural fallback</span></div>
+<div class="safety"><b>Research scope:</b> non-weaponized digital-twin prototype for flight dynamics, autonomy, mapping, navigation, reliability, environmental resilience and disaster response. Aircraft classes are generic public reference categories. The synthetic corridors shown are not real-world aviation guidance. Weapon employment, targeting, strike planning and offensive mission logic are not modeled.</div>
+<div class="footerbar"><span>KERYON FLIGHT LAB // MANHATTAN DIGITAL TWIN + RESILIENCE MODE</span><span>Official NYC building footprint data used when available // graceful procedural fallback</span></div>
 </main>
 <script type="module" src="./app.js"></script>
+<script type="module" src="./disaster.js"></script>
 </body>
 </html>
