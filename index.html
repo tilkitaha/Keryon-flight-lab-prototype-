@@ -1,96 +1,93 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#07090b" />
-  <meta name="description" content="KERYON Flight Lab — Manhattan 3D UAV flight, autonomy and resilience simulation prototype." />
-  <title>KERYON Flight Lab // New York</title>
-  <style>
-    :root{--bg:#07090b;--panel:#0d1116;--card:#121820;--line:#27303a;--text:#eef2f5;--muted:#8e9aa6;--gold:#d6a94a;--green:#59c98b;--amber:#e6b85c;--red:#e26a6a;--cyan:#70b8d6}
-    *{box-sizing:border-box}html{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{margin:0;background:radial-gradient(circle at 50% -20%,#17202a 0,#07090b 42%);min-height:100vh}button,select,input{font:inherit}button,select{min-height:44px}button{cursor:pointer}.app{max-width:1500px;margin:0 auto;padding:18px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:12px}.mark{width:48px;height:48px;border:1px solid #3b424a;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#161b20,#0a0d10)}.mark svg{width:34px}.brand h1{font-size:16px;letter-spacing:.25em;margin:0}.brand p{margin:4px 0 0;color:var(--muted);font-size:11px;letter-spacing:.14em}.status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.dot{width:8px;height:8px;border-radius:99px;background:var(--green);box-shadow:0 0 12px rgba(89,201,139,.45)}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.65fr);gap:14px}.panel{border:1px solid var(--line);background:rgba(13,17,22,.9);border-radius:16px;overflow:hidden}.worldWrap{position:relative;aspect-ratio:16/9;background:#111820;overflow:hidden}.world{width:100%;height:100%;display:block}.scanlines{position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.013) 50%,transparent 50%);background-size:100% 4px;mix-blend-mode:screen}.hudTop{position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:12px;pointer-events:none}.hudBadge{padding:7px 10px;border:1px solid rgba(255,255,255,.12);background:rgba(7,9,11,.62);backdrop-filter:blur(7px);border-radius:8px;font:11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:#dce4eb}.mapTag{position:absolute;left:14px;bottom:14px;padding:7px 10px;border:1px solid rgba(255,255,255,.12);background:rgba(7,9,11,.7);border-radius:8px;font:10px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;color:#aebbc5;pointer-events:none}.reticle{position:absolute;left:50%;top:50%;width:62px;height:62px;transform:translate(-50%,-50%);opacity:.38;pointer-events:none}.reticle:before,.reticle:after{content:"";position:absolute;background:#c9d2d9}.reticle:before{left:0;right:0;top:30px;height:1px}.reticle:after{top:0;bottom:0;left:30px;width:1px}.telemetry{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}.metric{background:var(--panel);padding:12px 13px;min-width:0}.metric .k{color:var(--muted);font-size:10px;letter-spacing:.13em;text-transform:uppercase}.metric .v{margin-top:5px;font:600 18px/1 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}.metric .u{font-size:10px;color:var(--muted);margin-left:3px}.right{display:flex;flex-direction:column;gap:14px}.section{padding:15px}.section h2{font-size:12px;margin:0 0 12px;letter-spacing:.17em;text-transform:uppercase}.field{display:block;margin-bottom:12px}.field span{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:11px;margin-bottom:6px}.field select{width:100%;background:#0a0e12;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:0 10px}.field input[type=range]{width:100%;accent-color:var(--gold)}.buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.btn{border:1px solid var(--line);border-radius:9px;background:#11171d;color:var(--text);padding:0 10px}.btn.primary{background:var(--gold);color:#111;border-color:var(--gold);font-weight:750}.btn:hover{filter:brightness(1.1)}.health{display:grid;gap:9px}.healthRow{display:flex;justify-content:space-between;gap:12px;font-size:12px}.healthRow span:first-child{color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.objective{font-size:13px;line-height:1.5;color:#cbd3da}.log{margin-top:12px;border:1px solid var(--line);border-radius:10px;background:#090d11;padding:10px;max-height:170px;overflow:auto;font:11px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;color:#aab5bf}.log div{border-bottom:1px dashed #1c252d;padding:3px 0}.log div:last-child{border:0}.safety{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--muted);font-size:11px;line-height:1.5;background:rgba(13,17,22,.72)}.source{margin-top:8px;color:#697681}.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;color:var(--muted);font-size:10px}.legend i{display:inline-block;width:8px;height:8px;border-radius:99px;margin-right:5px}.footer{text-align:center;color:#596571;font-size:10px;letter-spacing:.12em;padding:18px 0 3px}.fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:#d7dee5;background:#0e151b;text-align:center;padding:25px}
-    @media(max-width:980px){.layout{grid-template-columns:1fr}.right{display:grid;grid-template-columns:1fr 1fr}.telemetry{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:680px){.app{padding:10px}.brand p{display:none}.status span:last-child{display:none}.right{grid-template-columns:1fr}.telemetry{grid-template-columns:repeat(2,1fr)}.buttons{grid-template-columns:1fr}.worldWrap{aspect-ratio:4/3}.hudBadge,.mapTag{font-size:9px;padding:6px 7px}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#05070a" />
+<meta name="description" content="KERYON Flight Lab — Manhattan digital-twin UAV autonomy and resilience simulator." />
+<title>KERYON Flight Lab // Manhattan Digital Twin</title>
+<link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
 <main class="app">
-  <header class="topbar">
-    <div class="brand"><div class="mark" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none"><path d="M8 28L48 38L38 48L16 44L8 28Z" fill="#cbd0d4"/><path d="M18 49L43 52L36 61L24 59L18 49Z" fill="#9fa6ac"/><path d="M33 78L57 28L68 37L53 58L69 74H54L46 66L40 78H33Z" fill="#d8dde0"/><path d="M62 31L92 50L62 69L70 54L84 50L70 46L62 31Z" fill="#d6a94a"/></svg></div><div><h1>KERYON DYNAMICS</h1><p>FLIGHT LAB // NEW YORK DIGITAL TEST RANGE</p></div></div>
-    <div class="status"><i class="dot"></i><span id="simState">LOADING NYC</span><span>// RESEARCH BUILD 0.2</span></div>
-  </header>
-  <div class="layout">
-    <section class="panel">
-      <div class="worldWrap">
-        <canvas id="world" class="world" aria-label="Three-dimensional Manhattan UAV simulation"></canvas><div class="scanlines"></div><div class="reticle"></div>
-        <div class="hudTop"><div class="hudBadge" id="aircraftHud">MALE-R1</div><div class="hudBadge" id="scenarioHud">URBAN ENDURANCE</div></div>
-        <div class="mapTag" id="mapTag">NYC // MANHATTAN // GEO DATA LOADING</div>
-        <div class="fallback" id="fallback">3D engine could not load. Controls remain available, but this browser/network blocked the Three.js module.</div>
-      </div>
-      <div class="telemetry">
-        <div class="metric"><div class="k">Airspeed</div><div class="v"><span id="speed">0.0</span><span class="u">m/s</span></div></div>
-        <div class="metric"><div class="k">Altitude</div><div class="v"><span id="altitude">300</span><span class="u">m</span></div></div>
-        <div class="metric"><div class="k">Heading</div><div class="v"><span id="heading">020</span><span class="u">°</span></div></div>
-        <div class="metric"><div class="k">Energy</div><div class="v"><span id="energy">100.0</span><span class="u">%</span></div></div>
-        <div class="metric"><div class="k">Distance</div><div class="v"><span id="distance">0.0</span><span class="u">km</span></div></div>
-        <div class="metric"><div class="k">Sim time</div><div class="v"><span id="time">00:00</span></div></div>
-      </div>
-    </section>
-    <aside class="right">
-      <section class="panel section">
-        <h2>NYC Test Configuration</h2>
-        <label class="field"><span><b>Aircraft research profile</b></span><select id="aircraft"><option value="male">MALE-R1 // TB2-scale reference class</option><option value="heavy">HEAVY-R2 // Akıncı-scale reference class</option><option value="vtol">VTOL-X // Compact VTOL research class</option></select></label>
-        <label class="field"><span><b>Scenario</b></span><select id="scenario"><option value="urban">Urban endurance</option><option value="riverwind">Hudson crosswind</option><option value="gps">Urban GPS degradation</option><option value="link">Urban data-link shadow</option><option value="engine">Propulsion degradation</option></select></label>
-        <label class="field"><span><b>Throttle</b><output id="throttleOut">65%</output></span><input id="throttle" type="range" min="20" max="100" value="65" /></label>
-        <label class="field"><span><b>Commanded altitude</b><output id="altOut">900 m</output></span><input id="altCmd" type="range" min="150" max="3000" step="50" value="900" /></label>
-        <label class="field"><span><b>Heading command</b><output id="headingOut">020°</output></span><input id="headingCmd" type="range" min="0" max="359" value="20" /></label>
-        <div class="buttons"><button class="btn primary" id="start">START TEST</button><button class="btn" id="pause">PAUSE</button><button class="btn" id="reset">RESET</button></div>
-      </section>
-      <section class="panel section">
-        <h2>Vehicle + Map Health</h2>
-        <div class="health">
-          <div class="healthRow"><span>NYC geometry</span><b class="mono" id="geo">LOADING</b></div>
-          <div class="healthRow"><span>Buildings</span><b class="mono" id="buildings">LOADING</b></div>
-          <div class="healthRow"><span>Wind</span><b class="mono" id="wind">5.0 m/s</b></div>
-          <div class="healthRow"><span>GPS</span><b class="mono" id="gps">NOMINAL</b></div>
-          <div class="healthRow"><span>Data link</span><b class="mono" id="link">100%</b></div>
-          <div class="healthRow"><span>Propulsion</span><b class="mono" id="prop">100%</b></div>
-          <div class="healthRow"><span>Autopilot</span><b class="mono" id="autopilot">STANDBY</b></div>
-        </div>
-        <div class="legend"><span><i style="background:var(--green)"></i>Nominal</span><span><i style="background:var(--amber)"></i>Degraded</span><span><i style="background:var(--red)"></i>Critical</span></div>
-      </section>
-      <section class="panel section">
-        <h2>Scenario Objective</h2><div class="objective" id="objective">Evaluate stable autonomous flight over a Manhattan digital test environment while tracking energy and navigation resilience.</div><div class="log" id="log" aria-live="polite"><div>SYS // Flight computer standby</div><div>NYC // Loading Manhattan geometry</div></div>
-      </section>
-    </aside>
+<header class="topbar">
+  <div class="brand"><div class="mark" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none"><path d="M8 28L48 38L38 48L16 44L8 28Z" fill="#cbd0d4"/><path d="M18 49L43 52L36 61L24 59L18 49Z" fill="#9fa6ac"/><path d="M33 78L57 28L68 37L53 58L69 74H54L46 66L40 78H33Z" fill="#d8dde0"/><path d="M62 31L92 50L62 69L70 54L84 50L70 46L62 31Z" fill="#d6a94a"/></svg></div><div><h1>KERYON DYNAMICS</h1><p>FLIGHT LAB // MANHATTAN DIGITAL TWIN // INTELLIGENCE IN MOTION</p></div></div>
+  <div class="statusline"><i class="dot"></i><span id="simState">DIGITAL TWIN SYNC</span><span>// PROTOTYPE 0.4</span></div>
+</header>
+
+<div class="layout">
+<section class="panel">
+  <div class="worldWrap">
+    <canvas id="world" class="world" aria-label="Three-dimensional Manhattan UAV autonomy simulation"></canvas>
+    <div class="scanlines"></div><div class="vignette"></div><div class="reticle"></div>
+    <div class="hudTop"><div class="hudBadge" id="leftHud">NYC // MANHATTAN DIGITAL TWIN</div><div class="hudBadge" id="rightHud">URBAN ENDURANCE // FLEET 3</div></div>
+    <div class="hudBottom"><span class="pill" id="dataHud">NYC OPEN DATA: LOADING</span><span class="pill" id="sensorHud">SENSOR FUSION: ON</span><span class="pill" id="aiHud">NOEMA AUTONOMY: ACTIVE</span></div>
+    <div class="fallback" id="fallback">3D engine could not load. Controls remain available, but this browser or network blocked the Three.js module.</div>
   </div>
-  <div class="safety"><b>Simulation only.</b> The NYC environment is for non-weaponized flight, autonomy, navigation and resilience research. Routes are synthetic visualization paths and are not real-world flight guidance. Aircraft profiles are generic reference classes, not proprietary flight models.<div class="source">Map geometry: public Manhattan neighborhood geometry; building detail attempts to load NYC Open Data Building Footprints and falls back to a procedural skyline when needed.</div></div>
-  <div class="footer">KERYON FLIGHT LAB // NEW YORK TEST ENVIRONMENT</div>
+  <div class="telemetry">
+    <div class="metric"><div class="k">Airspeed</div><div class="v"><span id="speed">0.0</span><span class="u">m/s</span></div></div>
+    <div class="metric"><div class="k">Altitude</div><div class="v"><span id="altitude">420</span><span class="u">m</span></div></div>
+    <div class="metric"><div class="k">Heading</div><div class="v"><span id="heading">018</span><span class="u">°</span></div></div>
+    <div class="metric"><div class="k">Energy</div><div class="v"><span id="energy">100.0</span><span class="u">%</span></div></div>
+    <div class="metric"><div class="k">Link</div><div class="v"><span id="linkMetric">99</span><span class="u">%</span></div></div>
+    <div class="metric"><div class="k">Fleet</div><div class="v"><span id="fleetMetric">3</span><span class="u">UAV</span></div></div>
+    <div class="metric"><div class="k">Sim time</div><div class="v"><span id="time">00:00</span></div></div>
+  </div>
+</section>
+
+<aside class="side">
+<section class="panel section">
+  <h2>NOEMA Mission Control</h2>
+  <label class="field"><span><b>Research mission</b></span><select id="scenario"><option value="urban">Urban endurance mapping</option><option value="hudson">Hudson environmental corridor</option><option value="central">Central Park canopy survey</option><option value="link">Urban data-link shadow</option><option value="gps">GNSS multipath degradation</option><option value="prop">Propulsion degradation test</option><option value="storm">Severe weather resilience</option></select></label>
+  <label class="field"><span><b>Aircraft class</b></span><select id="aircraft"><option value="male">MALE-R1 // medium-altitude research class</option><option value="heavy">HEAVY-R2 // heavy endurance research class</option><option value="vtol">VTOL-X // compact urban research class</option></select></label>
+  <label class="field"><span><b>Fleet size</b><output id="fleetOut">3 UAV</output></span><input id="fleet" type="range" min="1" max="6" value="3" /></label>
+  <label class="field"><span><b>Commanded altitude</b><output id="altOut">420 m</output></span><input id="altCmd" type="range" min="120" max="1200" step="20" value="420" /></label>
+  <label class="field"><span><b>Simulation speed</b><output id="speedOut">4×</output></span><input id="simSpeed" type="range" min="1" max="10" value="4" /></label>
+  <div class="btnrow"><button class="btn primary" id="start">START MISSION</button><button class="btn" id="pause">PAUSE</button><button class="btn" id="reset">RESET</button></div>
+</section>
+
+<section class="panel section">
+  <h2>Immersive Systems</h2>
+  <div class="toggles">
+    <label class="toggle"><input id="sensorFusion" type="checkbox" checked /> Sensor fusion overlay</label>
+    <label class="toggle"><input id="lidar" type="checkbox" checked /> LiDAR mapping cloud</label>
+    <label class="toggle"><input id="trails" type="checkbox" checked /> Fleet path trails</label>
+    <label class="toggle"><input id="coverage" type="checkbox" /> Coverage heat field</label>
+    <label class="toggle"><input id="director" type="checkbox" checked /> Cinematic director</label>
+    <label class="toggle"><input id="night" type="checkbox" /> Night operations</label>
+    <label class="toggle"><input id="weather" type="checkbox" /> Rain / atmosphere</label>
+    <label class="toggle"><input id="formation" type="checkbox" checked /> Cooperative formation</label>
+  </div>
+</section>
+
+<section class="panel section">
+  <h2>AI Copilot // Local command parser</h2>
+  <div class="command"><input id="command" placeholder="Try: night storm 5 drones lidar" aria-label="AI copilot command"/><button class="btn primary" id="commandGo">RUN</button></div>
+  <div class="chips"><button class="chip" data-cmd="night 4 drones lidar">Night fleet</button><button class="chip" data-cmd="storm 3 drones sensor fusion">Storm test</button><button class="chip" data-cmd="central park 2 vtol daytime">Park survey</button><button class="chip" data-cmd="hudson 5 drones cinematic">Hudson demo</button></div>
+</section>
+
+<section class="panel section">
+  <h2>Digital Twin Health</h2>
+  <div class="health">
+    <div class="healthCard"><div class="k">GNSS confidence</div><div class="v" id="gps">98%</div><div class="bar"><i id="gpsBar" style="width:98%"></i></div></div>
+    <div class="healthCard"><div class="k">Data link</div><div class="v" id="link">99%</div><div class="bar"><i id="linkBar" style="width:99%"></i></div></div>
+    <div class="healthCard"><div class="k">Propulsion</div><div class="v" id="prop">100%</div><div class="bar"><i id="propBar" style="width:100%"></i></div></div>
+    <div class="healthCard"><div class="k">Wind field</div><div class="v" id="wind">6.0 m/s</div><div class="bar"><i id="windBar" style="width:20%"></i></div></div>
+  </div>
+  <canvas class="spark" id="spark" width="600" height="80" aria-label="Live telemetry trend"></canvas>
+</section>
+
+<section class="panel section">
+  <h2>Explainable Autonomy</h2>
+  <div id="decisions"><div class="decision"><b>NOEMA</b><span>Awaiting mission start. Autonomy decisions will be explained here in real time.</span></div></div>
+  <h3 style="margin-top:12px">Event stream</h3><div class="log" id="log"><div>SYS // Manhattan digital twin booting</div><div>DATA // NYC building footprint sync requested</div></div>
+</section>
+</aside>
+</div>
+
+<div class="safety"><b>Research scope:</b> non-weaponized digital-twin prototype for flight dynamics, autonomy, mapping, navigation, reliability and environmental resilience. Aircraft classes are generic public reference categories. The synthetic corridors shown are not real-world aviation guidance. Weapon employment, targeting, strike planning and offensive mission logic are not modeled.</div>
+<div class="footerbar"><span>KERYON FLIGHT LAB // MANHATTAN DIGITAL TWIN</span><span>Official NYC building footprint data used when available // graceful procedural fallback</span></div>
 </main>
-<script type="module">
-const $=id=>document.getElementById(id);const ui={canvas:$('world'),sim:$('simState'),aircraft:$('aircraft'),scenario:$('scenario'),throttle:$('throttle'),altCmd:$('altCmd'),headingCmd:$('headingCmd'),throttleOut:$('throttleOut'),altOut:$('altOut'),headingOut:$('headingOut'),start:$('start'),pause:$('pause'),reset:$('reset'),speed:$('speed'),altitude:$('altitude'),heading:$('heading'),energy:$('energy'),distance:$('distance'),time:$('time'),wind:$('wind'),gps:$('gps'),link:$('link'),prop:$('prop'),autopilot:$('autopilot'),objective:$('objective'),log:$('log'),aircraftHud:$('aircraftHud'),scenarioHud:$('scenarioHud'),fallback:$('fallback'),mapTag:$('mapTag'),geo:$('geo'),buildings:$('buildings')};
-const profiles={male:{name:'MALE-R1',cruise:41,max:60,climb:5.2,turn:10,drain:.010,scale:1},heavy:{name:'HEAVY-R2',cruise:55,max:84,climb:6.6,turn:7.2,drain:.016,scale:1.34},vtol:{name:'VTOL-X',cruise:27,max:43,climb:8.2,turn:18,drain:.021,scale:.72}};
-const scenarios={urban:{name:'URBAN ENDURANCE',objective:'Evaluate stable autonomous flight over a Manhattan digital test environment while tracking energy and navigation resilience.'},riverwind:{name:'HUDSON CROSSWIND',objective:'Hold commanded course and altitude while strong lateral wind disturbs the aircraft near the western Manhattan corridor.'},gps:{name:'URBAN GPS DEGRADATION',objective:'Evaluate navigation stability under simulated urban positioning degradation and recovery.'},link:{name:'URBAN DATA-LINK SHADOW',objective:'Measure autonomy continuity while simulated urban obstructions degrade the command link.'},engine:{name:'PROPULSION DEGRADATION',objective:'Measure controllability, speed recovery and energy behavior with reduced propulsion output.'}};
-const state={running:false,t:0,speed:0,altitude:300,heading:20,energy:100,distance:0,wind:5,gps:'NOMINAL',link:100,prop:100,x:-125,z:130};let THREE,scene,camera,renderer,drone,clock,cityGroup,pathLine,frame=0;
-function log(m){const d=document.createElement('div');d.textContent=m;ui.log.prepend(d);while(ui.log.children.length>8)ui.log.lastChild.remove()}
-function clamp(v,a,b){return Math.max(a,Math.min(b,v))}function angleDelta(a,b){return((b-a+540)%360)-180}function timeFmt(s){const m=Math.floor(s/60),q=Math.floor(s%60);return String(m).padStart(2,'0')+':'+String(q).padStart(2,'0')}
-function syncLabels(){ui.throttleOut.textContent=ui.throttle.value+'%';ui.altOut.textContent=ui.altCmd.value+' m';ui.headingOut.textContent=String(ui.headingCmd.value).padStart(3,'0')+'°'}
-function applyScenario(silent=false){const s=ui.scenario.value;state.wind=s==='riverwind'?19:5;state.gps=s==='gps'?'DEGRADED':'NOMINAL';state.link=s==='link'?70:100;state.prop=s==='engine'?62:100;ui.objective.textContent=scenarios[s].objective;ui.scenarioHud.textContent=scenarios[s].name;if(!silent)log('SCN // '+scenarios[s].name)}
-function reset(){state.running=false;state.t=0;state.speed=0;state.altitude=300;state.heading=20;state.energy=100;state.distance=0;state.x=-125;state.z=130;ui.pause.textContent='PAUSE';ui.sim.textContent='READY';applyScenario(true);updateHUD();if(drone){drone.position.set(state.x,32,state.z);drone.rotation.y=-state.heading*Math.PI/180}log('SYS // NYC simulation reset')}
-function updateHUD(){ui.speed.textContent=state.speed.toFixed(1);ui.altitude.textContent=state.altitude.toFixed(0);ui.heading.textContent=String(Math.round(state.heading)%360).padStart(3,'0');ui.energy.textContent=state.energy.toFixed(1);ui.distance.textContent=(state.distance/1000).toFixed(1);ui.time.textContent=timeFmt(state.t);ui.wind.textContent=state.wind.toFixed(1)+' m/s';ui.gps.textContent=state.gps;ui.link.textContent=state.link.toFixed(0)+'%';ui.prop.textContent=state.prop.toFixed(0)+'%';ui.autopilot.textContent=state.running?'ACTIVE':'STANDBY';ui.aircraftHud.textContent=profiles[ui.aircraft.value].name}
-function simulate(dt){const p=profiles[ui.aircraft.value],th=+ui.throttle.value/100,targetSpeed=Math.min(p.max,p.cruise*(.45+.85*th)*(state.prop/100));state.speed+=(targetSpeed-state.speed)*Math.min(1,dt*.65);const altErr=+ui.altCmd.value-state.altitude;state.altitude+=clamp(altErr*.025,-p.climb,p.climb)*dt;let desired=+ui.headingCmd.value;if(ui.scenario.value==='riverwind')desired+=Math.sin(state.t*.32)*8;if(ui.scenario.value==='gps'){const bad=Math.floor(state.t/16)%2===1;state.gps=bad?'DEGRADED':'NOMINAL';if(bad)desired+=Math.sin(state.t*.8)*11}if(ui.scenario.value==='link')state.link=68+18*Math.sin(state.t*.18);if(ui.scenario.value==='engine')state.prop=60+5*Math.sin(state.t*.12);state.heading=(state.heading+clamp(angleDelta(state.heading,desired),-p.turn,p.turn)*dt+360)%360;const r=state.heading*Math.PI/180,vx=Math.sin(r)*state.speed+(ui.scenario.value==='riverwind'?state.wind*.55:0),vz=Math.cos(r)*state.speed;state.x+=vx*dt*.10;state.z+=vz*dt*.10;state.distance+=Math.hypot(vx,vz)*dt;state.t+=dt;state.energy=clamp(state.energy-p.drain*(.35+th*.75)*dt,0,100);if(state.energy<=0){state.running=false;ui.sim.textContent='ENERGY DEPLETED';log('SYS // Energy depleted')}}
-const center={lon:-73.9857,lat:40.7580};function project(lon,lat){return{x:(lon-center.lon)*8400,z:-(lat-center.lat)*11100}}
-function buildDrone(){const g=new THREE.Group(),mat=new THREE.MeshStandardMaterial({color:0xbfc5ca,roughness:.48,metalness:.32}),dark=new THREE.MeshStandardMaterial({color:0x343b42,roughness:.75}),gold=new THREE.MeshStandardMaterial({color:0xd6a94a,roughness:.55,metalness:.25});const fus=new THREE.Mesh(new THREE.BoxGeometry(1.1,.55,5.2),mat);g.add(fus);const wing=new THREE.Mesh(new THREE.BoxGeometry(9.5,.16,1),mat);wing.position.z=.15;g.add(wing);const tail=new THREE.Mesh(new THREE.BoxGeometry(3.6,.12,.55),dark);tail.position.z=2.1;g.add(tail);const fin=new THREE.Mesh(new THREE.BoxGeometry(.15,1.1,.65),dark);fin.position.set(0,.55,2.15);g.add(fin);const nose=new THREE.Mesh(new THREE.ConeGeometry(.36,1.2,10),gold);nose.rotation.x=Math.PI/2;nose.position.z=-3;g.add(nose);return g}
-function addWaterAndGrid(){const water=new THREE.Mesh(new THREE.PlaneGeometry(1200,1200),new THREE.MeshStandardMaterial({color:0x102a36,roughness:.86,metalness:.08}));water.rotation.x=-Math.PI/2;water.position.y=-.18;scene.add(water);const grid=new THREE.GridHelper(900,90,0x29424c,0x1b3039);grid.position.y=.05;grid.material.opacity=.18;grid.material.transparent=true;scene.add(grid)}
-function polygonRings(geometry){if(!geometry)return[];if(geometry.type==='Polygon')return[geometry.coordinates];if(geometry.type==='MultiPolygon')return geometry.coordinates;return[]}
-async function loadManhattan(){try{const res=await fetch('https://cdn.jsdelivr.net/gh/codeforamerica/click_that_hood@48ba05ad/public/data/manhattan.geojson');if(!res.ok)throw new Error('geo');const geo=await res.json(),landMat=new THREE.MeshStandardMaterial({color:0x293631,roughness:1,side:THREE.DoubleSide}),edgeMat=new THREE.LineBasicMaterial({color:0x61716d,transparent:true,opacity:.45});let count=0;for(const f of geo.features){for(const poly of polygonRings(f.geometry)){const ring=poly[0];if(!ring||ring.length<3)continue;const shape=new THREE.Shape();ring.forEach((c,i)=>{const p=project(c[0],c[1]);if(i===0)shape.moveTo(p.x,-p.z);else shape.lineTo(p.x,-p.z)});const geom=new THREE.ShapeGeometry(shape);geom.rotateX(-Math.PI/2);const mesh=new THREE.Mesh(geom,landMat);mesh.position.y=0;cityGroup.add(mesh);const pts=ring.map(c=>{const p=project(c[0],c[1]);return new THREE.Vector3(p.x,.16,p.z)});cityGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),edgeMat));count++}}ui.geo.textContent='LIVE // '+count+' AREAS';log('NYC // Manhattan geometry loaded');return true}catch(e){ui.geo.textContent='FALLBACK';log('NYC // Geometry fallback active');const island=new THREE.Mesh(new THREE.CapsuleGeometry(85,430,8,18),new THREE.MeshStandardMaterial({color:0x293631,roughness:1}));island.rotation.z=.48;island.rotation.x=Math.PI/2;island.scale.y=.45;island.position.set(-10,.2,0);cityGroup.add(island);return false}}
-function addProceduralSkyline(){const mat=new THREE.MeshStandardMaterial({color:0x56616a,roughness:.82,metalness:.08});let n=0;for(let z=-250;z<220;z+=16){for(let x=-90;x<90;x+=13){const taper=1-Math.min(1,Math.abs(z)/330),width=70+55*taper;if(Math.abs(x)>width)continue;if(Math.random()<.22)continue;const h=3+Math.random()*10+(Math.abs(z)<75?Math.random()*18:0),w=7+Math.random()*4,d=9+Math.random()*5;const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);b.position.set(x+(Math.random()-.5)*3,h/2,z+(Math.random()-.5)*3);cityGroup.add(b);n++}}ui.buildings.textContent='PROCEDURAL // '+n;ui.mapTag.textContent='NYC // MANHATTAN // PROCEDURAL BUILDINGS';log('NYC // Procedural skyline loaded')}
-async function loadBuildings(){try{const q=encodeURIComponent('within_box(the_geom,40.775,-74.015,40.735,-73.965)'),url='https://data.cityofnewyork.us/resource/3g6p-4u5s.geojson?$limit=650&$where='+q,res=await fetch(url);if(!res.ok)throw new Error('buildings');const geo=await res.json();if(!geo.features||geo.features.length<20)throw new Error('empty');const mat=new THREE.MeshStandardMaterial({color:0x59636b,roughness:.75,metalness:.12});let built=0;for(const f of geo.features.slice(0,650)){const props=f.properties||{},raw=Number(props.heightroof||props.height_roof||props['Height Roof']||0),height=clamp(raw>0?raw*.3048/10:2+Math.random()*8,.8,42);for(const poly of polygonRings(f.geometry)){const ring=poly[0];if(!ring||ring.length<4)continue;const shape=new THREE.Shape();ring.forEach((c,i)=>{const p=project(c[0],c[1]);if(i===0)shape.moveTo(p.x,-p.z);else shape.lineTo(p.x,-p.z)});try{const g=new THREE.ExtrudeGeometry(shape,{depth:height,bevelEnabled:false,steps:1});g.rotateX(-Math.PI/2);const m=new THREE.Mesh(g,mat);m.position.y=.1;cityGroup.add(m);built++;if(built>500)break}catch(e){}}if(built>500)break}if(built<20)throw new Error('few');ui.buildings.textContent='NYC OPEN DATA // '+built;ui.mapTag.textContent='NYC // MANHATTAN // BUILDING FOOTPRINTS LIVE';log('NYC // '+built+' building footprints loaded')}catch(e){addProceduralSkyline()}}
-function addCentralPark(){const a=project(-73.9819,40.7681),b=project(-73.9498,40.8007),w=Math.abs(b.x-a.x),d=Math.abs(b.z-a.z),park=new THREE.Mesh(new THREE.PlaneGeometry(w,d),new THREE.MeshStandardMaterial({color:0x244a31,roughness:1}));park.rotation.x=-Math.PI/2;park.position.set((a.x+b.x)/2,.25,(a.z+b.z)/2);scene.add(park)}
-function addSyntheticCorridor(){const pts=[new THREE.Vector3(-145,30,145),new THREE.Vector3(-135,38,55),new THREE.Vector3(-122,42,-35),new THREE.Vector3(-110,45,-125),new THREE.Vector3(-98,48,-215)],geom=new THREE.BufferGeometry().setFromPoints(pts),mat=new THREE.LineBasicMaterial({color:0xd6a94a,transparent:true,opacity:.75});pathLine=new THREE.Line(geom,mat);scene.add(pathLine);for(const p of pts){const ring=new THREE.Mesh(new THREE.TorusGeometry(5,.4,8,28),new THREE.MeshBasicMaterial({color:0xd6a94a}));ring.position.copy(p);ring.rotation.x=Math.PI/2;scene.add(ring)}}
-async function init(){try{THREE=await import('https://cdn.jsdelivr.net/npm/three@0.180.0/+esm');scene=new THREE.Scene();scene.background=new THREE.Color(0x0b1117);scene.fog=new THREE.FogExp2(0x0b1117,.0014);camera=new THREE.PerspectiveCamera(56,16/9,.1,3000);renderer=new THREE.WebGLRenderer({canvas:ui.canvas,antialias:true});renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));renderer.shadowMap.enabled=true;scene.add(new THREE.HemisphereLight(0xdbe5ef,0x142018,2.2));const sun=new THREE.DirectionalLight(0xffffff,2.5);sun.position.set(-180,330,-120);scene.add(sun);cityGroup=new THREE.Group();scene.add(cityGroup);addWaterAndGrid();await loadManhattan();addCentralPark();await loadBuildings();addSyntheticCorridor();drone=buildDrone();scene.add(drone);clock=new THREE.Clock();const resize=()=>{const r=ui.canvas.getBoundingClientRect(),w=Math.max(320,r.width),h=w*(window.innerWidth<680?.75:.5625);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};new ResizeObserver(resize).observe(ui.canvas);resize();ui.sim.textContent='READY // NYC';reset();loop()}catch(e){console.error(e);ui.fallback.style.display='flex';ui.sim.textContent='3D LOAD ERROR';ui.geo.textContent='UNAVAILABLE';ui.buildings.textContent='UNAVAILABLE'}}
-function loop(){const dt=Math.min(.05,clock.getDelta());if(state.running)simulate(dt*8);const p=profiles[ui.aircraft.value];drone.scale.setScalar(p.scale);drone.position.set(state.x,Math.max(20,state.altitude*.052),state.z);drone.rotation.y=-state.heading*Math.PI/180;const back=new THREE.Vector3(-55,32,-64).applyAxisAngle(new THREE.Vector3(0,1,0),-state.heading*Math.PI/180);const desired=drone.position.clone().add(back);camera.position.lerp(desired,.035);camera.lookAt(drone.position.x,drone.position.y+2,drone.position.z);renderer.render(scene,camera);updateHUD();frame=requestAnimationFrame(loop)}
-ui.throttle.addEventListener('input',syncLabels);ui.altCmd.addEventListener('input',syncLabels);ui.headingCmd.addEventListener('input',syncLabels);ui.scenario.addEventListener('change',()=>applyScenario(false));ui.aircraft.addEventListener('change',()=>{ui.aircraftHud.textContent=profiles[ui.aircraft.value].name;log('AIR // '+profiles[ui.aircraft.value].name)});ui.start.addEventListener('click',()=>{if(state.energy<=0)reset();state.running=true;ui.sim.textContent='RUNNING // NYC';ui.autopilot.textContent='ACTIVE';log('SYS // NYC test started')});ui.pause.addEventListener('click',()=>{state.running=!state.running;ui.pause.textContent=state.running?'PAUSE':'RESUME';ui.sim.textContent=state.running?'RUNNING // NYC':'PAUSED';log('SYS // '+(state.running?'Resumed':'Paused'))});ui.reset.addEventListener('click',reset);syncLabels();applyScenario(true);updateHUD();init();
-</script>
+<script type="module" src="./app.js"></script>
 </body>
 </html>
